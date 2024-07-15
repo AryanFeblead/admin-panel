@@ -7,6 +7,15 @@ $(document).ready(function() {
         $('#view_user1').hide();
         $('#add_user').on('submit', function(e) {
             e.preventDefault();
+            $('#emp_name').val()
+            $('#emp_email').val()
+            $('#emp_phone').val()
+            $('#emp_password').val()
+            $('#emp_role').val()
+            $('#emp_event').val()
+            $('#emp_calander').val()
+            $('#emp_dashboard').val()
+
             var formData = new FormData(this);
             formData.append('actionName', 'add_product');
             $.ajax({

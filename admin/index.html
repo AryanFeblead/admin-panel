@@ -31,14 +31,10 @@
 
     <link id="pagestyle" href="./assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
 
-
+    <link rel="stylesheet" href="./assets/css/custome.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/js/custom.js"></script>
-    <!-- Nepcha Analytics (nepcha.com) -->
-    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-
 
 </head>
 
@@ -112,40 +108,40 @@
                     <form id="create_user_form" method="post">
                         <div class="mb-3">
                             <label for="" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="">
-                            <div class="">
+                            <input type="text" class="form-control" id="emp_name">
+                            <div class="val_name">
                                 Please provide a valid Username.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <div class="">
-                                Please provide a valid city.
+                            <input type="email" class="form-control" id="emp_email" aria-describedby="emailHelp">
+                            <div class="val_email">
+                                Please provide a valid email.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Phone no.</label>
-                            <input type="number" class="form-control" id="">
-                            <div class="">
-                                Please provide a valid city.
+                            <input type="number" class="form-control" id="emp_phone">
+                            <div class="val_phone">
+                                Please provide a valid Phone no.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
-                            <div class="">
-                                Please provide a valid city.
+                            <input type="password" class="form-control" id="emp_password">
+                            <div class="val_password">
+                                Please provide a valid password.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Role -:</label>
                             <label for="" class="form-label">Admin</label>
-                            <input type="radio" class="" name="role" id="">
+                            <input type="radio" class="" name="emp_role" id="emp_admin" value="admin">
                             <label for="" class="form-label">Staff</label>
-                            <input type="radio" class="" name="role" id="">
-                            <div class="">
-                                Please provide a valid city.
+                            <input type="radio" class="" name="emp_role" id="emp_staff" value="staff">
+                            <div class="val_role">
+                                Please provide a Employee Role.
                             </div>
                         </div>
                         <div class="container" style="width: 50%;">
@@ -155,33 +151,30 @@
                                 <label for="" class="form-label">Edit</label>
                                 <label for="" class="form-label">Detail</label>
                                 <label for="" class="form-label">All</label>
-
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Event -:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <input type="radio" class="" name="event" id="">
-                                <input type="radio" class="" name="event" id="">
-                                <input type="radio" class="" name="event" id="">
-                                <input type="radio" class="" name="event" id="">
-
+                                <input type="radio" class="" name="emp_event" id="emp_event1" value="view">
+                                <input type="radio" class="" name="emp_event" id="emp_event2" value="edit">
+                                <input type="radio" class="" name="emp_event" id="emp_event3" value="detail">
+                                <input type="radio" class="" name="emp_event" id="emp_event4" value="all">
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Calendar -:&nbsp;&nbsp;&nbsp;</label>
-                                <input type="radio" class="" name="calendar" id="">
-                                <input type="radio" class="" name="calendar" id="">
-                                <input type="radio" class="" name="calendar" id="">
-                                <input type="radio" class="" name="calendar" id="">
-
+                                <input type="radio" class="" name="emp_calendar" id="emp_calendar1" value="view">
+                                <input type="radio" class="" name="emp_calendar" id="emp_calendar2" value="edit">
+                                <input type="radio" class="" name="emp_calendar" id="emp_calendar3" value="detail">
+                                <input type="radio" class="" name="emp_calendar" id="emp_calendar4" value="all">
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Dashboard -:</label>
-                                <input type="radio" class="" name="dashboard" id="">
-                                <input type="radio" class="" name="dashboard" id="">
-                                <input type="radio" class="" name="dashboard" id="">
-                                <input type="radio" class="" name="dashboard" id="">
+                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard1" value="view">
+                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard2" value="edit">
+                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard3" value="detail">
+                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard4" value="all">
                             </div>
-                            <div class="">
-                                Please provide a valid city.
+                            <div class="val_permission">
+                                Please provide a Permission.
                             </div>
                         </div>
                         <button id="add_user" class="btn btn-primary">Add User</button>
