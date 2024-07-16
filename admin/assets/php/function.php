@@ -8,13 +8,16 @@ function add_user()
 
     if (isset($_POST['emp_name'])) {
 
-        
-        $prod_name = $_POST['prod_name'];
-        $prod_qun = $_POST['prod_qun'];
-        $prod_price = $_POST['prod_price'];
-        $prod_detail = $_POST['prod_detail'];
+        $emp_name = $_POST['emp_name'];
+        $emp_email = $_POST['emp_email'];
+        $emp_phone = $_POST['emp_phone'];
+        $emp_password = $_POST['emp_password'];
+        $emp_role = $_POST['emp_role'];
+        $emp_event = $_POST['emp_event'];
+        $emp_calendar = $_POST['emp_calendar'];
+        $emp_dashboard = $_POST['emp_dashboard'];
 
-        $sql = "INSERT INTO  product_tbl (prod_name,prod_img,prod_quantity,prod_price,prod_detail) values ('$prod_name','$prod_qun','$prod_price','$prod_detail')";
+        $sql = "INSERT INTO  emp_tbl (emp_name,emp_email,emp_phone,emp_password,emp_role,emp_event,emp_calendar,emp_dashboard) values ('$emp_name','$emp_email','$emp_phone','$emp_password','$emp_role','$emp_event','$emp_calendar','$emp_dashboard')";
         if (mysqli_query($conn, $sql)) {
             echo json_encode(["status" => "success", "message" => "User added successfully"]);
         } else {
@@ -25,7 +28,7 @@ function add_user()
 function view_user()
 {
     global $conn;
-    $select = mysqli_query($conn, "SELECT * FROM product_tbl");
+    $select = mysqli_query($conn, "SELECT * FROM emp_tbl");
     $users = [];
 
     if (mysqli_num_rows($select) > 0) {

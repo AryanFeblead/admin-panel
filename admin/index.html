@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="./assets/css/custome.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/js/custom.js"></script>
 
 </head>
@@ -103,44 +104,50 @@
     <main class="main-content border-radius-lg ">
         <div class="container-fluid py-4">
             <h1 class="text-center">Welcome To Admin Panel</h1>
+            <div class="alert alert-success" id="success" role="alert">
+                A simple success alert—check it out!
+            </div>
+            <div class="alert alert-danger" id="notsuccess" role="alert">
+                A simple danger alert—check it out!
+            </div>
             <div id="create_user1">
                 <div class="container" style="width: 70%;">
                     <form id="create_user_form" method="post">
                         <div class="mb-3">
                             <label for="" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="emp_name">
-                            <div class="val_name">
+                            <input type="text" name="emp_name" class="form-control" id="emp_name">
+                            <div id="val_name">
                                 Please provide a valid Username.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="emp_email" aria-describedby="emailHelp">
-                            <div class="val_email">
+                            <input type="email" name="emp_email" class="form-control" id="emp_email" aria-describedby="emailHelp">
+                            <div id="val_email">
                                 Please provide a valid email.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Phone no.</label>
-                            <input type="number" class="form-control" id="emp_phone">
-                            <div class="val_phone">
+                            <input type="number" name="emp_phone" class="form-control" id="emp_phone">
+                            <div id="val_phone">
                                 Please provide a valid Phone no.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="emp_password">
-                            <div class="val_password">
+                            <input type="password" name="emp_password" class="form-control" id="emp_password">
+                            <div id="val_password">
                                 Please provide a valid password.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Role -:</label>
                             <label for="" class="form-label">Admin</label>
-                            <input type="radio" class="" name="emp_role" id="emp_admin" value="admin">
+                            <input type="radio" class="emp_role" name="emp_role" id="emp_admin" value="admin">
                             <label for="" class="form-label">Staff</label>
-                            <input type="radio" class="" name="emp_role" id="emp_staff" value="staff">
-                            <div class="val_role">
+                            <input type="radio" class="emp_role" name="emp_role" id="emp_staff" value="staff">
+                            <div id="val_role">
                                 Please provide a Employee Role.
                             </div>
                         </div>
@@ -154,26 +161,26 @@
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Event -:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <input type="radio" class="" name="emp_event" id="emp_event1" value="view">
-                                <input type="radio" class="" name="emp_event" id="emp_event2" value="edit">
-                                <input type="radio" class="" name="emp_event" id="emp_event3" value="detail">
-                                <input type="radio" class="" name="emp_event" id="emp_event4" value="all">
+                                <input type="radio" class="emp_event" name="emp_event" id="emp_event1" value="view">
+                                <input type="radio" class="emp_event" name="emp_event" id="emp_event2" value="edit">
+                                <input type="radio" class="emp_event" name="emp_event" id="emp_event3" value="detail">
+                                <input type="radio" class="emp_event" name="emp_event" id="emp_event4" value="all">
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Calendar -:&nbsp;&nbsp;&nbsp;</label>
-                                <input type="radio" class="" name="emp_calendar" id="emp_calendar1" value="view">
-                                <input type="radio" class="" name="emp_calendar" id="emp_calendar2" value="edit">
-                                <input type="radio" class="" name="emp_calendar" id="emp_calendar3" value="detail">
-                                <input type="radio" class="" name="emp_calendar" id="emp_calendar4" value="all">
+                                <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar1" value="view">
+                                <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar2" value="edit">
+                                <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar3" value="detail">
+                                <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar4" value="all">
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Dashboard -:</label>
-                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard1" value="view">
-                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard2" value="edit">
-                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard3" value="detail">
-                                <input type="radio" class="" name="emp_dashboard" id="emp_dashboard4" value="all">
+                                <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard1" value="view">
+                                <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard2" value="edit">
+                                <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard3" value="detail">
+                                <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard4" value="all">
                             </div>
-                            <div class="val_permission">
+                            <div id="val_permission">
                                 Please provide a Permission.
                             </div>
                         </div>
@@ -182,38 +189,28 @@
                 </div>
             </div>
             <div id="view_user1">
-                <div class="container" style="width: 70%;">
-                    <table class="table">
+                <div class="container" style="width: 90%;">
+                    <table id="emp_tbl" class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Employee ID</th>
+                                <th scope="col">Employee Name</th>
+                                <th scope="col">Employee Email</th>
+                                <th scope="col">Employee Phone no.</th>
+                                <th scope="col">Employee Role</th>
+                                <th scope="col">Employee Event</th>
+                                <th scope="col">Employee Calendar</th>
+                                <th scope="col">Employee Dashboard</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                        <tbody id="result">
+
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </main>
