@@ -27,6 +27,7 @@ $select = mysqli_query($conn, "SELECT * FROM emp_tbl where emp_id = '$emp_id'");
 	<link rel="apple-touch-icon" sizes="180x180" href="vendors/images/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="vendors/images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="vendors/images/favicon-16x16.png">
+	<link rel="stylesheet" href="./css/style.css">
 
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -39,11 +40,15 @@ $select = mysqli_query($conn, "SELECT * FROM emp_tbl where emp_id = '$emp_id'");
 	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.2.0/main.min.css'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.3.0/main.min.css'>
+	<link rel="stylesheet" href="calendar.css">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+	
 	<script>
 		$(document).ready(function() {
 			
@@ -86,18 +91,6 @@ chart.render();
 });
 
 </script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
 <script src="index.js"></script>
 
 </head>
@@ -240,6 +233,12 @@ chart.render();
 	<div class="mobile-menu-overlay"></div>
 
 	<div class="main-container">
+	<div class="alert alert-success" id="success" role="alert">
+                A simple success alert—check it out!
+            </div>
+            <div class="alert alert-danger" id="notsuccess" role="alert">
+                A simple danger alert—check it out!
+            </div>
 		<div id="dashboard1">
 			<div id="chartContainer" style="height: 80vh; width: 100%;"></div>
 		</div>
@@ -261,9 +260,16 @@ chart.render();
                             </div>
                         </div>
 						<div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Event Date</label>
+                            <label for="exampleInputPassword1" class="form-label">Event To Date</label>
                             <input type="date" name="eve_date" class="form-control" id="eve_date">
                             <div id="val_date">
+                                Please provide a valid date.
+                            </div>
+                        </div>
+						<div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Event From Date</label>
+                            <input type="date" name="eve_date1" class="form-control" id="eve_date1">
+                            <div id="val_date1">
                                 Please provide a valid date.
                             </div>
                         </div>
@@ -291,14 +297,13 @@ chart.render();
                     <table id="emp_tbl" class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Employee ID</th>
-                                <th scope="col">Employee Name</th>
-                                <th scope="col">Employee Email</th>
-                                <th scope="col">Employee Phone no.</th>
-                                <th scope="col">Employee Role</th>
-                                <th scope="col">Employee Event</th>
-                                <th scope="col">Employee Calendar</th>
-                                <th scope="col">Employee Dashboard</th>
+                                <th scope="col">Event ID</th>
+                                <th scope="col">Event Name</th>
+                                <th scope="col">Event Location</th>
+                                <th scope="col">Event To Date</th>
+                                <th scope="col">Event From Date</th>
+                                <th scope="col">Event Time</th>
+                                <th scope="col">Event Amount</th>
                                 <th scope="col">Action</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -310,16 +315,81 @@ chart.render();
                 </div>
 		</div>
 		<div id="calendar1">
-		<div id='calendar'></div>
+		<main class="cd__main">
+         <!-- Start DEMO HTML (Use the following code into your project)-->
+         <div id='calendar'></div>
+
+    <!-- Add modal -->
+
+    <div class="modal fade edit-form" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="modal-title">Add Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="myForm">
+                    <div class="modal-body">
+                        <div class="alert alert-danger " role="alert" id="danger-alert" style="display: none;">
+                            End date should be greater than start date.
+                          </div>
+                        <div class="form-group">
+                            <label for="event-title">Event name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="event-title" placeholder="Enter event name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="start-date">Start date <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="start-date" placeholder="start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date">End date - <small class="text-muted">Optional</small></label>
+                            <input type="date" class="form-control" id="end-date" placeholder="end-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-color">Color</label>
+                            <input type="color" class="form-control" id="event-color" value="#3788d8">
+                          </div>
+                    </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success" id="submit-button">Submit</button>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="delete-modal-title">Confirm Deletion</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center" id="delete-modal-body">
+              Are you sure you want to delete the event?
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary rounded-sm" data-dismiss="modal" id="cancel-button">Cancel</button>
+              <button type="button" class="btn btn-danger rounded-lg" id="delete-button">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+         <!-- END EDMO HTML (Happy Coding!)-->
+      </main>
 		</div>
 	</div>
 	<!-- js -->
-	
+	<script src="./js/script.js"></script>
 	<script src="vendors/scripts/core.js"></script>
 	<script src="vendors/scripts/script.min.js"></script>
 	<script src="vendors/scripts/process.js"></script>
 	<script src="vendors/scripts/layout-settings.js"></script>
 	<!-- <script src="src/plugins/apexcharts/apexcharts.min.js"></script> -->
+	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.2.0/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.2.0/main.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.2.0/main.js'></script>
 	<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
 	<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 	<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
