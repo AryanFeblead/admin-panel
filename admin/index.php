@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['emp_id'])) {
+    header("Location: ../login/dist/"); 
+    exit(); 
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +18,6 @@
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
 
     <title>Admin cPanel</title>
-
-
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -87,13 +94,13 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/sign-in.html">
+                    <a class="nav-link text-white " href="logout.php">
 
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
 
-                        <span class="nav-link-text ms-1">Login</span>
+                        <span class="nav-link-text ms-1">Logout</span>
                     </a>
                 </li>
             </ul>
@@ -156,7 +163,7 @@
                                 <label for="" class="form-label">Permission -:</label>
                                 <label for="" class="form-label">View</label>
                                 <label for="" class="form-label">Edit</label>
-                                <label for="" class="form-label">Detail</label>
+                                <label for="" class="form-label">Delete</label>
                                 <label for="" class="form-label">All</label>
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
@@ -214,6 +221,96 @@
             </div>
         </div>
     </main>
+    <div class="modal fade" id="Update">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="UpdateLabel">Update Form</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p id="up-messages-error"></p>
+              <form id="create_user_form1" method="post">
+                <div class="mb-3">
+                    <label for="" class="form-label">Username</label>
+                    <input type="text" name="emp_name1" class="form-control" id="emp_name1">
+                    <div id="val_name1">
+                        Please provide a valid Username.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" name="emp_email1" class="form-control" id="emp_email1" aria-describedby="emailHelp">
+                    <div id="val_email1">
+                        Please provide a valid email.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Phone no.</label>
+                    <input type="number" name="emp_phone1" class="form-control" id="emp_phone1">
+                    <div id="val_phone1">
+                        Please provide a valid Phone no.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" name="emp_password1" class="form-control" id="emp_password1">
+                    <div id="val_password1">
+                        Please provide a valid password.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Role -:</label>
+                    <label for="" class="form-label">Admin</label>
+                    <input type="radio" class="emp_role" name="emp_role1" id="emp_admin1" value="admin">
+                    <label for="" class="form-label">Staff</label>
+                    <input type="radio" class="emp_role" name="emp_role1" id="emp_staff1" value="staff">
+                    <div id="val_role1">
+                        Please provide a Employee Role.
+                    </div>
+                </div>
+                <div class="container" style="width: 50%;">
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="" class="form-label">Permission -:</label>
+                        <label for="" class="form-label">View</label>
+                        <label for="" class="form-label">Edit</label>
+                        <label for="" class="form-label">Detail</label>
+                        <label for="" class="form-label">All</label>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="" class="form-label">Event -:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <input type="radio" class="emp_event" name="emp_event1" id="emp_event11" value="view">
+                        <input type="radio" class="emp_event" name="emp_event1" id="emp_event21" value="edit">
+                        <input type="radio" class="emp_event" name="emp_event1" id="emp_event31" value="detail">
+                        <input type="radio" class="emp_event" name="emp_event1" id="emp_event41" value="all">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="" class="form-label">Calendar -:&nbsp;&nbsp;&nbsp;</label>
+                        <input type="radio" class="emp_calendar" name="emp_calendar1" id="emp_calendar11" value="view">
+                        <input type="radio" class="emp_calendar" name="emp_calendar1" id="emp_calendar21" value="edit">
+                        <input type="radio" class="emp_calendar" name="emp_calendar1" id="emp_calendar31" value="detail">
+                        <input type="radio" class="emp_calendar" name="emp_calendar1" id="emp_calendar41" value="all">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="" class="form-label">Dashboard -:</label>
+                        <input type="radio" class="emp_dashboard" name="emp_dashboard1" id="emp_dashboard11" value="view">
+                        <input type="radio" class="emp_dashboard" name="emp_dashboard1" id="emp_dashboard21" value="edit">
+                        <input type="radio" class="emp_dashboard" name="emp_dashboard1" id="emp_dashboard31" value="detail">
+                        <input type="radio" class="emp_dashboard" name="emp_dashboard1" id="emp_dashboard41" value="all">
+                    </div>
+                    <div id="val_permission1">
+                        Please provide a Permission.
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="btn_update">Update Now</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_close">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <!--   Core JS Files   -->
     <script src="./assets/js/core/popper.min.js"></script>
     <script src="./assets/js/core/bootstrap.min.js"></script>
