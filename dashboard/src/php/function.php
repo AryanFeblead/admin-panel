@@ -111,5 +111,3 @@ function updateData() {
 
     mysqli_stmt_close($stmt);
 }
-
-
