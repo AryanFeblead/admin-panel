@@ -170,21 +170,21 @@ if (!isset($_SESSION['emp_id'])) {
                                 <label for="" class="form-label">Event -:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <input type="radio" class="emp_event" name="emp_event" id="emp_event1" value="view">
                                 <input type="radio" class="emp_event" name="emp_event" id="emp_event2" value="edit">
-                                <input type="radio" class="emp_event" name="emp_event" id="emp_event3" value="detail">
+                                <input type="radio" class="emp_event" name="emp_event" id="emp_event3" value="delete">
                                 <input type="radio" class="emp_event" name="emp_event" id="emp_event4" value="all">
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Calendar -:&nbsp;&nbsp;&nbsp;</label>
                                 <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar1" value="view">
                                 <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar2" value="edit">
-                                <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar3" value="detail">
+                                <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar3" value="delete">
                                 <input type="radio" class="emp_calendar" name="emp_calendar" id="emp_calendar4" value="all">
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <label for="" class="form-label">Dashboard -:</label>
                                 <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard1" value="view">
                                 <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard2" value="edit">
-                                <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard3" value="detail">
+                                <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard3" value="delete">
                                 <input type="radio" class="emp_dashboard" name="emp_dashboard" id="emp_dashboard4" value="all">
                             </div>
                             <div id="val_permission">

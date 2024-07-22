@@ -60,22 +60,20 @@ function eve_delete(){
     }
 }
 
-function fetchData(){
+function eve_fetch(){
     global $conn;
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
-        $query = "SELECT * FROM emp_tbl WHERE emp_id='$id'";
+        $query = "SELECT * FROM event_tbl WHERE eve_id='$id'";
         $result = mysqli_query($conn, $query);
         $ajax_data = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $ajax_data[] = $row['emp_name'];
-            $ajax_data[] = $row['emp_email'];
-            $ajax_data[] = $row['emp_phone'];
-            $ajax_data[] = $row['emp_password'];
-            $ajax_data[] = $row['emp_role'];
-            $ajax_data[] = $row['emp_event'];
-            $ajax_data[] = $row['emp_calendar'];
-            $ajax_data[] = $row['emp_dashboard'];
+            $ajax_data[] = $row['eve_name'];
+            $ajax_data[] = $row['eve_location'];
+            $ajax_data[] = $row['eve_to_date'];
+            $ajax_data[] = $row['eve_from_date'];
+            $ajax_data[] = $row['eve_time'];
+            $ajax_data[] = $row['eve_amount'];
         }
         echo json_encode($ajax_data);
     } else {

@@ -12,6 +12,8 @@ $select = mysqli_query($conn, "SELECT * FROM emp_tbl where emp_id = '$emp_id'");
 if (mysqli_num_rows($select) > 0) {
 	while ($row = mysqli_fetch_assoc($select)) {
 		$emp_name = $row['emp_name'];
+		$emp_event = $row['emp_event'];
+		$emp_calendar = $row['emp_calendar'];
 	}
 }
 ?>
@@ -327,9 +329,97 @@ if (mysqli_num_rows($select) > 0) {
 						</tr>
 					</thead>
 					<tbody id="result">
+						<?php
+						$select1 = mysqli_query($conn, "SELECT * FROM event_tbl");
 
+						if (mysqli_num_rows($select1) > 0) {
+							while ($row = mysqli_fetch_assoc($select1)) {
+								echo "<tr>";
+								echo "<td>" . $row['eve_id'] . "</td>";
+								echo "<td>" . $row['eve_name'] . "</td>";
+								echo "<td>" . $row['eve_location'] . "</td>";
+								echo "<td>" . $row['eve_to_date'] . "</td>";
+								echo "<td>" . $row['eve_from_date'] . "</td>";
+								echo "<td>" . $row['eve_time'] . "</td>";
+								echo "<td>" . $row['eve_amount'] . "</td>";
+								if ($emp_event == "edit" || $emp_event == "all") {
+									echo "<td><a data-id=" . $row['eve_id'] . " class='btn btn-primary text-white edit'>Edit</a></td>";
+								} else {
+									echo "<td>Not Available</td>";
+								}
+								if ($emp_event == "delete" || $emp_event == "all") {
+									echo "<td><a data-id=" . $row['eve_id'] . " class='btn btn-danger text-white delete'>Delete</a></td>";
+								} else {
+									echo "<td>Not Available</td>";
+								}
+								echo "</tr>";
+							}
+						}
+						?>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div class="modal fade" id="Update">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="UpdateLabel">Update Form</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p id="up-messages-error"></p>
+						<form id="event_form" method="post">
+					<div class="mb-3">
+						<label for="" class="form-label">Event Name</label>
+						<input type="text" name="eve_name1" class="form-control" id="eve_name1">
+						<div id="val_name1">
+							Please provide a valid event name.
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="" class="form-label">Event Location</label>
+						<input type="text" name="eve_location1" class="form-control" id="eve_location1">
+						<div id="val_location1">
+							Please provide a valid location.
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Event To Date</label>
+						<input type="date" name="eve_date1" class="form-control" id="eve_date1">
+						<div id="val_date1">
+							Please provide a valid date.
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Event From Date</label>
+						<input type="date" name="eve_date11" class="form-control" id="eve_date11">
+						<div id="val_date11">
+							Please provide a valid date.
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Event Time</label>
+						<input type="time" name="eve_time1" class="form-control" id="eve_time1">
+						<div id="val_time1">
+							Please provide a valid time.
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Event Amount</label>
+						<input type="number" name="eve_amount1" class="form-control" id="eve_amount1">
+						<div id="val_amount1">
+							Please provide a valid amount.
+						</div>
+					</div>
+				</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="btn_update">Update Now</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+							id="btn_close">Close</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -344,6 +434,9 @@ if (mysqli_num_rows($select) > 0) {
 	<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 	<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 	<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<script>
+		$("#emp_tbl").DataTable();
+	</script>
 </body>
 
 </html>
