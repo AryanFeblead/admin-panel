@@ -3,9 +3,10 @@
 require ('conn.php');
 
 session_start();
-function add_event(){
+function add_event()
+{
     global $conn;
-    
+
     $emp_id = $_SESSION['emp_id'];
     if (isset($_POST['eve_name'])) {
 
@@ -39,7 +40,8 @@ function view_event()
     echo json_encode($users);
 }
 
-function eve_delete(){
+function eve_delete()
+{
     global $conn;
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
@@ -60,7 +62,8 @@ function eve_delete(){
     }
 }
 
-function eve_fetch(){
+function eve_fetch()
+{
     global $conn;
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
@@ -81,31 +84,39 @@ function eve_fetch(){
     }
 }
 
-function updateData() {
+function eve_update()
+{
     global $conn;
 
-    $emp_name = $_POST['emp_name1'];
-    $emp_email = $_POST['emp_email1'];
-    $emp_phone = $_POST['emp_phone1'];
-    $emp_password = $_POST['emp_password1'];
-    $emp_role = $_POST['emp_role1'];
-    $emp_event = $_POST['emp_event1'];
-    $emp_calendar = $_POST['emp_calendar1'];
-    $emp_dashboard = $_POST['emp_dashboard1'];
+    $eve_name = $_POST['eve_name1'];
+    $eve_location = $_POST['eve_location1'];
+    $eve_to_date = $_POST['eve_date12'];
+    $eve_from_date = $_POST['eve_date11'];
+    $eve_time = $_POST['eve_time1'];
+    $eve_amount = $_POST['eve_amount1'];
+    $id = $_POST['id'];
 
-    $sql = "UPDATE emp_tbl SET emp_name=?, emp_email=?, emp_phone=?, emp_password=?, emp_role=?, emp_event=?, emp_calendar=?, emp_dashboard=? WHERE emp_id=?";
-    
+    // Prepare SQL statement
+    $sql = "UPDATE event_tbl SET eve_name=?, eve_location=?, eve_to_date=?, eve_from_date=?, eve_time=?, eve_amount=? WHERE eve_id=?";
+
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssssssssi", $emp_name, $emp_email, $emp_phone, $emp_password, $emp_role, $emp_event, $emp_calendar, $emp_dashboard, $id);
 
-    $id = $_POST['id']; // Assuming you're passing 'id' in your AJAX request
-    $id = intval($id); // Convert id to integer if needed
-
-    if (mysqli_stmt_execute($stmt)) {
-        echo json_encode(["status" => "success", "message" => "User updated successfully"]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "User update failed"]);
+    // Check if prepare statement succeeded
+    if ($stmt === false) {
+        echo json_encode(["status" => "error", "message" => "Prepare statement failed: " . mysqli_error($conn)]);
+        return;
     }
 
+    // Bind parameters
+    mysqli_stmt_bind_param($stmt, "ssssssi", $eve_name, $eve_location, $eve_to_date, $eve_from_date, $eve_time, $eve_amount, $id);
+
+    // Execute statement
+    if (mysqli_stmt_execute($stmt)) {
+        echo json_encode(["status" => "success", "message" => "Event updated successfully"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Event update failed: " . mysqli_stmt_error($stmt)]);
+    }
+
+    // Close statement
     mysqli_stmt_close($stmt);
 }

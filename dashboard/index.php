@@ -324,8 +324,15 @@ if (mysqli_num_rows($select) > 0) {
 							<th scope="col">Event From Date</th>
 							<th scope="col">Event Time</th>
 							<th scope="col">Event Amount</th>
-							<th scope="col">Action</th>
-							<th scope="col">Action</th>
+							<?php
+							if ($emp_event == "edit" || $emp_event == "all") {
+								echo "<th scope='col'>Action</th>";
+							}
+							if ($emp_event == "delete" || $emp_event == "all") {
+								echo "<th scope='col'>Action</th>";
+							}
+							?>
+
 						</tr>
 					</thead>
 					<tbody id="result">
@@ -344,13 +351,9 @@ if (mysqli_num_rows($select) > 0) {
 								echo "<td>" . $row['eve_amount'] . "</td>";
 								if ($emp_event == "edit" || $emp_event == "all") {
 									echo "<td><a data-id=" . $row['eve_id'] . " class='btn btn-primary text-white edit'>Edit</a></td>";
-								} else {
-									echo "<td>Not Available</td>";
 								}
 								if ($emp_event == "delete" || $emp_event == "all") {
 									echo "<td><a data-id=" . $row['eve_id'] . " class='btn btn-danger text-white delete'>Delete</a></td>";
-								} else {
-									echo "<td>Not Available</td>";
 								}
 								echo "</tr>";
 							}
@@ -370,49 +373,49 @@ if (mysqli_num_rows($select) > 0) {
 					<div class="modal-body">
 						<p id="up-messages-error"></p>
 						<form id="event_form" method="post">
-					<div class="mb-3">
-						<label for="" class="form-label">Event Name</label>
-						<input type="text" name="eve_name1" class="form-control" id="eve_name1">
-						<div id="val_name1">
-							Please provide a valid event name.
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="" class="form-label">Event Location</label>
-						<input type="text" name="eve_location1" class="form-control" id="eve_location1">
-						<div id="val_location1">
-							Please provide a valid location.
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="exampleInputPassword1" class="form-label">Event To Date</label>
-						<input type="date" name="eve_date1" class="form-control" id="eve_date1">
-						<div id="val_date1">
-							Please provide a valid date.
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="exampleInputPassword1" class="form-label">Event From Date</label>
-						<input type="date" name="eve_date11" class="form-control" id="eve_date11">
-						<div id="val_date11">
-							Please provide a valid date.
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="exampleInputPassword1" class="form-label">Event Time</label>
-						<input type="time" name="eve_time1" class="form-control" id="eve_time1">
-						<div id="val_time1">
-							Please provide a valid time.
-						</div>
-					</div>
-					<div class="mb-3">
-						<label for="exampleInputPassword1" class="form-label">Event Amount</label>
-						<input type="number" name="eve_amount1" class="form-control" id="eve_amount1">
-						<div id="val_amount1">
-							Please provide a valid amount.
-						</div>
-					</div>
-				</form>
+							<div class="mb-3">
+								<label for="" class="form-label">Event Name</label>
+								<input type="text" name="eve_name1" class="form-control" id="eve_name1">
+								<div id="val_name1">
+									Please provide a valid event name.
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="" class="form-label">Event Location</label>
+								<input type="text" name="eve_location1" class="form-control" id="eve_location1">
+								<div id="val_location1">
+									Please provide a valid location.
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label">Event To Date</label>
+								<input type="date" name="eve_date12" class="form-control" id="eve_date12">
+								<div id="val_date12">
+									Please provide a valid date.
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label">Event From Date</label>
+								<input type="date" name="eve_date11" class="form-control" id="eve_date11">
+								<div id="val_date11">
+									Please provide a valid date.
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label">Event Time</label>
+								<input type="time" name="eve_time1" class="form-control" id="eve_time1">
+								<div id="val_time1">
+									Please provide a valid time.
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label">Event Amount</label>
+								<input type="number" name="eve_amount1" class="form-control" id="eve_amount1">
+								<div id="val_amount1">
+									Please provide a valid amount.
+								</div>
+							</div>
+						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" id="btn_update">Update Now</button>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $(
-        "#success,#notsuccess,#dashboard1,#add_event1,#view_event1,#calendar1,#val_name,#val_phone,#val_location,#val_date,#val_date1,#val_time,#val_amount"
+        "#success,#notsuccess,#dashboard1,#add_event1,#view_event1,#calendar1,#val_name,#val_phone,#val_location,#val_date,#val_date1,#val_time,#val_amount,#val_name1,#val_phone1,#val_location1,#val_date12,#val_date11,#val_time1,#val_amount1"
     ).hide();
     $("#dashboard").click(function(e) {
         e.preventDefault();
@@ -96,8 +96,6 @@ $(document).ready(function() {
                 actionName: "view_event",
             },
             success: function(data) {
-                data1 = $.parseJSON(data);
-
                 $(".edit").on("click", function() {
                     console.log('sdfsdgdf');
                     var id = $(this).data("id");
@@ -160,7 +158,7 @@ $(document).ready(function() {
             success: function(data) {
                 $("#eve_name1").val(data[0])
                 $("#eve_location1").val(data[1])
-                $("#eve_date1").val(data[2])
+                $("#eve_date12").val(data[2])
                 $("#eve_date11").val(data[3])
                 $("#eve_time1").val(data[4])
                 $("#eve_amount1").val(data[5])
@@ -176,93 +174,64 @@ $(document).ready(function() {
         var isValid = true;
 
         $(
-            "#val_name1, #val_email1, #val_phone1, #val_password1, #val_role1, #val_permission1"
+            "#val_name1,#val_phone1,#val_location1,#val_date12,#val_date11,#val_time1,#val_amount1"
         ).hide();
 
-        // Validate employee name
-        if ($("#emp_name1").val() == "") {
+        if ($("#eve_name1").val() == "") {
             $("#val_name1").show().css("color", "red");
             isValid = false;
         }
 
-        // Validate email
-        var email = $("#emp_email1").val();
-        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email == "") {
-            $("#val_email1").show().css("color", "red");
+        if ($("#eve_location1").val() == "") {
+            $("#val_location1").show().css("color", "red");
             isValid = false;
-        } else if (!emailPattern.test(email)) {
-            $("#val_email1").show().css("color", "red").html("Invalid email format");
+        }
+        if ($("#eve_date12").val() == "") {
+            $("#val_date12").show().css("color", "red");
+            isValid = false;
+        }
+        if ($("#eve_date11").val() == "") {
+            $("#val_date11").show().css("color", "red");
+            isValid = false;
+        }
+        if ($("#eve_time1").val() == "") {
+            $("#val_time1").show().css("color", "red");
             isValid = false;
         }
 
-        // Validate phone number
-        var phone = $("#emp_phone1").val();
-        if (phone == "") {
-            $("#val_phone1").show().css("color", "red");
-            isValid = false;
-        } else if (phone.length < 10) {
-            $("#val_phone1")
-                .show()
-                .html("Mobile no. should be 10 digits")
-                .css("color", "red");
+        if ($("#eve_amount1").val() == "") {
+            $("#val_amount1").show().css("color", "red");
             isValid = false;
         }
 
-        // Validate password
-        if ($("#emp_password1").val() == "") {
-            $("#val_password1").show().css("color", "red");
-            isValid = false;
-        }
-
-        // Validate role
-        if ($(".emp_role:checked").length === 0) {
-            $("#val_role").show().css("color", "red");
-            isValid = false;
-        }
-
-        // Validate permissions
-        if (
-            $(".emp_event:checked").length === 0 ||
-            $(".emp_calendar:checked").length === 0 ||
-            $(".emp_dashboard:checked").length === 0
-        ) {
-            $("#val_permission").show().css("color", "red");
-            isValid = false;
-        }
         if (isValid) {
-            //   var prod_name1 = $("#prod_name1").val();
-            //   var prod_qun1 = $("#prod_qun1").val();
-            //   var prod_price1 = $("#prod_price1").val();
-            //   var prod_detail1 = $("#prod_address1").val();
-            //   var prod_img1 = $("#prod_img1").val();
-            //   console.log($("#prod_img1").val());
-            var formData = new FormData(this);
-            //   formData.append("prod_id", id);
-            //   formData.append("prod_name1", prod_name1);
-            //   formData.append("prod_img1", prod_img1);
-            //   formData.append("prod_qun1", prod_qun1);
-            //   formData.append("prod_price1", prod_price1);
-            //   formData.append("prod_detail1", prod_detail1);
-            formData.append("actionName", "update");
+            var eve_name1 = $("#eve_name1").val();
+            var eve_location1 = $("#eve_location1").val();
+            var eve_date12 = $("#eve_date12").val();
+            var eve_date11 = $("#eve_date11").val();
+            var eve_time1 = $("#eve_time1").val();
+            var eve_amount1 = $("#eve_amount1").val();
+            var formData = new FormData();
+            formData.append("id", id);
+            formData.append("eve_name1", eve_name1);
+            formData.append("eve_location1", eve_location1);
+            formData.append("eve_date12", eve_date12);
+            formData.append("eve_date11", eve_date11);
+            formData.append("eve_time1", eve_time1);
+            formData.append("eve_amount1", eve_amount1);
+            formData.append("actionName", "eve_update");
             $.ajax({
-                url: "assets/php/ajx.php",
+                url: "src/php/ajx.php",
                 method: "post",
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(data) {
                     $(
-                        "#val_name1, #val_email1, #val_phone1, #val_password1, #val_role1, #val_permission1"
+                        "#val_name1,#val_phone1,#val_location1,#val_date12,#val_date11,#val_time1,#val_amount1"
                     ).hide();
                     $("#Update").modal("hide");
-                    $(".alert-success")
-                        .show()
-                        .fadeOut(function() {
-                            // window.location.reload()
-                        });
-                    $(".alert-success").html("Data Updated Successfully");
-                    $(".alert-success").hide();
+                    window.location.reload()
                 },
                 error: function() {
                     $(".alert-danger").show().delay(2000).fadeOut();

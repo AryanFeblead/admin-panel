@@ -14,4 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['actionName']) && $_POST['actionName'] == 'eve_fetch') {
         eve_fetch();
     }
+    if (isset($_POST['actionName']) && $_POST['actionName'] == 'eve_update') {
+        eve_update();
+    }
 }
